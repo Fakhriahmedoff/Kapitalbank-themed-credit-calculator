@@ -20,12 +20,47 @@
     <div class="wrap">
         <div class="totals">
 
-            <h2 style="text-align: left;padding: 50px;"><strong>"BirKartla"
-                    Hissə Hissə Ödəniş </strong> </h2>
-            <img style="position: absolute;width: 200px;right: 20px;top:
-                20px;z-index: -2;" src="images/birkart.png" alt="">
+            <h2 style="text-align: left;padding: 50px;"><strong>"BirKartla" Hissə Hissə Ödəniş </strong> </h2>
+            <img style="position: absolute;width: 200px;right: 20px;top: 20px;z-index: -2;" src="images/birkart.png"
+                alt="">
             <div class="container">
-                
+                <div class="price-box" style="z-index: 200;"><span>
+                        <h4 class="great total-price">Ümumi Məbləğ: <strong style="margin-left:5px;"> 2.28 </strong>
+                            <strong> AZN</strong> </h4>
+                    </span>
+                    <form class="form-horizontal form-pricing" role="form" method="post" action="../thank-you-ec.php">
+                        <div class="price-slider">
+                            <h5 style="padding-bottom:6px;font-weight:bold;text-align:center;">Ödənişi Neçə Aya Bölmək
+                                İstəyirsiniz?</h5>
+                            <h4 class="great">Ayları Seçin</h4>
+                            <div class="col-sm-12">
+
+                                <div id="slider"></div>
+                            </div>
+                            <div class="flexx">
+                                <span style="font-weight:bold;">3</span><span style="font-weight:bold;">6</span><span
+                                    style="font-weight:bold;">9</span><span style="font-weight:bold;">12</span>
+                            </div>
+
+                        </div>
+                        <div class="price-form">
+                   
+                            <div class="form-group total">
+                                <label for="total" class="col-sm-6 control-label"><strong>Aylıq Ödəniş:
+                                    </strong></label>
+                                <div class="col-sm-6" style="font-size:20px;">
+                                    <input type="hidden" value="0.76 " name="price" id="total" class="form-control">
+                                    <p class="price lead" id="total-label"></p>
+                                    <strong><span class="price"> <span id="pricee" class="lead"> 0.76 </span> </span>
+                                    </strong>AZN
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="submit">Sifarişi Təsdiqlə</button>
+                    </form>
+                </div>
             </div>
 
 
@@ -35,20 +70,71 @@
 
 
 
-    <script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
-    <script
-        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-    <script
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-        integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="crossorigin="anonymous"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#slider").slider({
+                animate: true,
+                value: 3,
+                min: 3,
+                max: 12,
+                step: 3,
+                slide: function (event, ui) {
+                    update(1, ui.value); //changed
+                }
+            });
+            //Added, set initial value.
+            $("#amount").val(3);
+            $("#amount-label").text(0);
+            if (("#amount").text()) {
+                console.log("salam");
+            }
+            update();
+        });
+
+
+
+        //changed. now with parameter
+        function update(slider, val) {
+            //changed. Now, directly take value from ui.value. if not set (initial, will use current value.)
+            var $amount = slider == 1 ? val : $("#amount").val();
+
+            /* commented
+            $amount = $( "#slider" ).slider( "value" );
+             */
+
+            $tot = 2.28 / $amount;
+
+            $total = $tot.toFixed(2);
+            $('#percentage-label').html('10');
+
+            //$total = "₹" + (($amount * 10)  / 100);
+
+            $("#amount").val($amount);
+            $("#amount-label").text($amount);
+            $("#total").val($total);
+            $("#total-label").text($total);
+
+
+
+            $('#slider a').html('<label><span class="glyphicon glyphicon-chevron-left"></span> ' + $amount + ' <span class="glyphicon glyphicon-chevron-right"></span></label>');
+
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("span").focus(function () {
+                $("#pricee").hide();
+            });
+        });
+    </script>
 </body>
