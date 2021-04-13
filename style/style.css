@@ -74,7 +74,7 @@ top: -36px;
  outline: none;
 }
 .price, .lead p {
- font-weight: 600;
+ font-weight: 200;
  font-size: 32px;
  display: inline-block;
  line-height: 60px;
